@@ -33,11 +33,11 @@ public class LoginActivity extends AppCompatActivity {
         LinearLayout linearLayout = findViewById(R.id.layout_linearLogin);
 
         login.setOnClickListener(v->{
-            if (!loginEmail.getText().toString().equals(sharedPreferences.getString("account_username", ""))) {
+            if (!loginEmail.getText().toString().equals(sharedPreferences.getString("account_email", ""))) {
                 Toast.makeText(LoginActivity.this, "Email Invalid", Toast.LENGTH_SHORT).show();
             } else if (!loginPassword.getText().toString().equals(sharedPreferences.getString("account_password",""))) {
                 Toast.makeText(LoginActivity.this, "Password Invalid", Toast.LENGTH_SHORT).show();
-            } else if (loginEmail.getText().toString().equals(sharedPreferences.getString("account_username", ""))
+            } else if (loginEmail.getText().toString().equals(sharedPreferences.getString("account_email", ""))
                     && loginPassword.getText().toString().equals(sharedPreferences.getString("account_password",""))){
 
                 Snackbar.make(linearLayout,"Login successful",Snackbar.LENGTH_SHORT)
