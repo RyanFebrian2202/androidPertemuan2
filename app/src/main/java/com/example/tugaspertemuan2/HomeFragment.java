@@ -35,7 +35,7 @@ public class HomeFragment extends Fragment {
         email = v.findViewById(R.id.tv_email);
 
         //gtw error kenapa
-        Intent intent = getIntent();
+        Intent intent = getActivity().getIntent();
 
         String tempUsername = intent.getStringExtra("account_username");
         username.setText(tempUsername);
