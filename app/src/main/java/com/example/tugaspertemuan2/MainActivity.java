@@ -1,7 +1,10 @@
 package com.example.tugaspertemuan2;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager2.widget.ViewPager2;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,31 +15,36 @@ import android.widget.Toast;
 
 import com.google.android.material.snackbar.BaseTransientBottomBar;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button logout;
-    TextView username, email;
+    TabLayout tabLayout;
+    ViewPager2 viewPager2;
+    PageAdapter pageAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        logout = findViewById(R.id.btn_logout);
-        username = findViewById(R.id.tv_username);
-        email = findViewById(R.id.tv_email);
+        tabLayout = findViewById(R.id.tab_layout);
+        viewPager2 = findViewById(R.id.vp_viewPager2);
 
-        Intent intent = getIntent();
-        String tempUsername = intent.getStringExtra("account_username");
-        username.setText(tempUsername);
+        setViewPager2(viewPager2);
 
-        String tempEmail = intent.getStringExtra("account_email");
-        email.setText(tempEmail);
+        new TabLayoutMediator(tabLayout,viewPager2,(((tab, position) -> {
+            tab.setText(pageAdapter.getFragmentTitle(position));
+        }))).attach();
+    }
 
-        logout.setOnClickListener(v->{
-            Intent logoutIntent = new Intent(MainActivity.this,LoginActivity.class);
-            startActivity(logoutIntent);
-        });
+    public void setViewPager2(ViewPager2 viewPager2){
+        if (pageAdapter == null){
+            pageAdapter = new PageAdapter(this);
+            pageAdapter.addFragment(new HomeFragment(),"Home");
+            pageAdapter.addFragment(new ProfileFragment(), "Profile");
+            viewPager2.setAdapter(pageAdapter);
+        }
     }
 }
