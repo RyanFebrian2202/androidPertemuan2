@@ -21,7 +21,7 @@ import android.widget.Toast;
  */
 public class HomeFragment extends Fragment {
 
-    Button logout;
+    Button logout, content;
     TextView username, email;
 
     @Override
@@ -31,6 +31,7 @@ public class HomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
 
         logout = v.findViewById(R.id.btn_logout);
+        content = v.findViewById(R.id.btn_content);
         username = v.findViewById(R.id.tv_username);
         email = v.findViewById(R.id.tv_email);
 
@@ -46,6 +47,11 @@ public class HomeFragment extends Fragment {
         logout.setOnClickListener(view->{
             Intent logoutIntent = new Intent(getActivity(),LoginActivity.class);
             startActivity(logoutIntent);
+        });
+
+        content.setOnClickListener(view->{
+            Intent contentIntent = new Intent(getActivity(),ContentActivity.class);
+            startActivity(contentIntent);
         });
 
         return v;
