@@ -1,7 +1,11 @@
 package com.example.tugaspertemuan2.data.remotes;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.SerializedName;
 
+@Entity
 public class ContentListItem {
 
 	@SerializedName("name")
@@ -10,6 +14,7 @@ public class ContentListItem {
 	@SerializedName("logo")
 	private String logo;
 
+	@PrimaryKey
 	@SerializedName("id")
 	private int id;
 

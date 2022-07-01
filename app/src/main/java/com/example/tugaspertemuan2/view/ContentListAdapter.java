@@ -20,6 +20,12 @@ public class ContentListAdapter extends RecyclerView.Adapter<ContentListAdapter.
         this.contentItems = contentItems;
     }
 
+    OnItemClickCallback mOnItemClickCallback;
+
+    public void setmOnItemClickCallback(OnItemClickCallback onItemClickCallback) {
+        this.mOnItemClickCallback = onItemClickCallback;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -30,6 +36,9 @@ public class ContentListAdapter extends RecyclerView.Adapter<ContentListAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(contentItems.get(position));
+        holder.binding.ibSave.setOnClickListener(view -> {
+            mOnItemClickCallback.onInsertClick(contentItems.get(position));
+        });
     }
 
     @Override
@@ -49,5 +58,9 @@ public class ContentListAdapter extends RecyclerView.Adapter<ContentListAdapter.
             binding.tvContentTitle.setText(contentListItems.getName());
             Glide.with(binding.getRoot()).load(contentListItems.getLogo()).into(binding.ivLogo);
         }
+    }
+
+    public interface OnItemClickCallback {
+        void onInsertClick(ContentListItem contentListItem);
     }
 }
